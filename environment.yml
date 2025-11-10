@@ -1,0 +1,33 @@
+name: dsi_participant
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - numpy[version='>=2.0']
+  - requests
+  - ipykernel
+  - pandas[version='>=2.2']
+  - seaborn
+  - scikit-learn
+  - python-dotenv
+  - dask
+  - pyarrow[version='>=16']
+  - sacred
+  - sqlalchemy
+  - psycopg2
+  - shap
+  - fancyimpute
+  - missingno
+  - tensorflow
+  - matplotlib
+  - plotly
+  - nbformat
+  - scikit-image
+  - opencv
+  - transformers
+  - yfinance
+  - pygam
+  - pybind11
+  - distributed[version='>=2024.8.0']
+  - fastparquet[version='>=2024.2.0']
+prefix: C:\Users\alanm\miniconda3\envs\dsi_participant

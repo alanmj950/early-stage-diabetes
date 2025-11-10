@@ -1,0 +1,7 @@
+/data/raw/*
+!/data/raw/diabetes_data_upload.csv
+__pycache__/
+*.pyc
+.env
+.ipynb_checkpoints/
+models/
