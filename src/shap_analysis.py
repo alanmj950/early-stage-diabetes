@@ -1,11 +1,3 @@
-"""
-src/shap_analysis.py
-Compute SHAP importance for the saved model and save plots:
- - figures/shap_summary_beeswarm.png
- - figures/shap_feature_importance.png (bar)
-Usage:
-    python src/shap_analysis.py --model models/best_model.joblib --input data/processed/processed.csv --figdir figures
-"""
 import argparse
 import pandas as pd
 import joblib
@@ -15,52 +7,47 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
 def save_shap_plots(model, X_train, X_test, figdir):
-    # If the model is a Pipeline, get the final estimator and preprocessing separately
+    # If model is a Pipeline, get final estimator and transform
     if hasattr(model, "named_steps"):
-        # assume last step is estimator, and preprocess is earlier
-        preprocessing = None
-        estimator = None
-        # try common pipeline names
-        if "scaler" in model.named_steps:
-            # remove scaler from pipeline to pass raw X_train numeric array
-            try:
-                # use pipeline.transform to get numeric features
-                X_train_trans = model.named_steps["scaler"].transform(X_train)
-                X_test_trans = model.named_steps["scaler"].transform(X_test)
-            except Exception:
-                X_train_trans = X_train.values
-                X_test_trans = X_test.values
-        else:
-            # fallback
-            X_train_trans = X_train.values
-            X_test_trans = X_test.values
-        # get estimator
         estimator = list(model.named_steps.values())[-1]
+        X_train_trans = X_train.copy()
+        X_test_trans = X_test.copy()
+        # Apply scaler if exists
+        if "scaler" in model.named_steps:
+            X_train_trans = pd.DataFrame(model.named_steps["scaler"].transform(X_train),
+                                         columns=X_train.columns)
+            X_test_trans = pd.DataFrame(model.named_steps["scaler"].transform(X_test),
+                                        columns=X_test.columns)
     else:
         estimator = model
-        X_train_trans = X_train.values
-        X_test_trans = X_test.values
+        X_train_trans = X_train.copy()
+        X_test_trans = X_test.copy()
 
-    # Use TreeExplainer for tree models if possible
+    # Use SHAP Explainer
     try:
-        expl = shap.TreeExplainer(estimator)
+        expl = shap.TreeExplainer(estimator, feature_perturbation="tree_path_dependent")
     except Exception:
         expl = shap.Explainer(estimator, X_train_trans)
 
-    shap_values = expl(X_test_trans)  # new SHAP API returns Explanation object
+    shap_values = expl(X_test_trans)
 
     os.makedirs(figdir, exist_ok=True)
-    # summary beeswarm
-    # For binary classification, pick positive class
-    shap_values_pos = shap_values[:, :, 1]  # 3D -> 2D
-    plt.figure(figsize=(8,6))
+
+    # For binary classification pick positive class
+    if len(shap_values.shape) == 3:  # multi-class output
+        shap_values_pos = shap_values[:, :, 1]
+    else:
+        shap_values_pos = shap_values
+
+    # Beeswarm plot
+    plt.figure(figsize=(10,6))
     shap.plots.beeswarm(shap_values_pos, show=False)
     plt.tight_layout()
     plt.savefig(os.path.join(figdir, "shap_summary_beeswarm.png"), bbox_inches="tight")
     plt.close()
 
-    # bar plot (mean abs)
-    plt.figure(figsize=(8,6))
+    # Bar plot
+    plt.figure(figsize=(10,6))
     shap.plots.bar(shap_values_pos, show=False)
     plt.tight_layout()
     plt.savefig(os.path.join(figdir, "shap_feature_importance.png"), bbox_inches="tight")
