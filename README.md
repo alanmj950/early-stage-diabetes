@@ -1,7 +1,7 @@
 # Early Stage Diabetes Risk Prediction
 
 ## Project Overview
-This project predicts the risk of early-stage diabetes using demographic and clinical features. It is a **classification problem**, where the target variable indicates whether an individual is at risk of early-stage diabetes. The project is structured to support **reproducibility, explainability, and collaborative team workflow**.
+A machine learning project to predict early-stage diabetes using patient clinical data. This project includes data preprocessing, model training, evaluation, and SHAP-based interpretability analysis.**.
 
 - **Classification Task**: Identify significant predictors of early-stage diabetes risk among individuals.
 - **Use Case**: Helps healthcare providers identify high-risk patients early and plan preventive interventions.
