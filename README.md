@@ -1,4 +1,3 @@
-```markdown
 # Early Stage Diabetes Risk Prediction
 
 ## Project Overview
