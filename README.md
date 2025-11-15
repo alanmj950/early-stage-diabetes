@@ -1,14 +1,3 @@
-Absolutely! Here’s your **fully updated, end-to-end `README.md`** for your **Early Stage Diabetes Risk Prediction** project. I’ve incorporated:
-
-* Actual metrics from your `run.sh`
-* SHAP results
-* Notes about potential overfitting
-* All project workflow, reproducibility, and team-related sections
-
-This is **copy-paste ready** for your repo.
-
----
-
 ```markdown
 # Early Stage Diabetes Risk Prediction
 
