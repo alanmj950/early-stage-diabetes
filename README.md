@@ -156,7 +156,6 @@ python src/shap_analysis.py --model models/best_model.joblib --input data/proces
 
 ### 6. Full Pipeline
 
-* Windows PowerShell: `.\run.ps1`
 * Bash: `bash run.sh`
 * Executes all steps in order from raw data to evaluation and SHAP analysis
 
@@ -200,7 +199,7 @@ Other model performances for reference:
   * Feature branches created for each task: EDA, Modeling, SHAP
   * Pull Requests simulate collaborative team contribution
   * Commits clearly document preprocessing, modeling, evaluation
-* `run.sh` / `run.ps1` allows **end-to-end reproducible execution**
+* `run.sh` allows **end-to-end reproducible execution**
 
 ---
 
@@ -209,14 +208,5 @@ Other model performances for reference:
 * Early detection of diabetes risk allows **proactive healthcare interventions**
 * Top features identified by SHAP inform **clinician focus areas**
 * Model evaluation ensures **robust predictions** for real-world deployment
-
----
-
-## Additional Notes
-
-* Interactive exploration possible in `notebooks/`
-* Figures and reports automatically generated for presentations
-* Fully documented scripts enable **reproducibility for team submissions**
-* End-to-end workflow aligns with **team project expectations**, demonstrating technical skills, ML knowledge, and business value.
 
 ---
