@@ -70,7 +70,6 @@ early_stage_diabetes/
 ```bash
 conda env create -f environment.yml
 conda activate dsi_participant
-python -c "import sys; print(sys.version)"
 ````
 
 **Dependencies include**:
