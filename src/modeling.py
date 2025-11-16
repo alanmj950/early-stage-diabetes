@@ -46,8 +46,10 @@ if __name__ == "__main__":
     df = pd.read_csv(args.input)
     X, y = prepare_X_y(df)
 
-    # train/test split (stratify to keep class balance)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, test_size=0.2, random_state=42)
+    # Option 1: 60% train, 20% validation, 20% test
+    X_train, X_temp, y_train, y_temp = train_test_split(X, y, stratify=y, test_size=0.4, random_state=42)
+    X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, stratify=y_temp, test_size=0.5, random_state=42)
+
 
     # Define pipelines (scaler + model for models that need scaling)
     lr_pipe = Pipeline([
@@ -57,18 +59,32 @@ if __name__ == "__main__":
 
     rf_pipe = Pipeline([
         ("scaler", StandardScaler()),
-        ("rf", RandomForestClassifier(n_estimators=200, class_weight="balanced", random_state=42))
+        ("rf", RandomForestClassifier(
+            n_estimators=200,
+            max_depth=5,              # limit tree depth
+            min_samples_leaf=5,       # leaf constraint
+            class_weight="balanced",
+            random_state=42
+        ))
     ])
-
     # HistGradientBoosting does not require scaling - use directly
-    hgb = HistGradientBoostingClassifier(random_state=42)
+    hgb = HistGradientBoostingClassifier(
+        max_iter=100,
+        max_depth=3,
+        min_samples_leaf=5,
+        learning_rate=0.1,
+        early_stopping=True,
+        random_state=42
+    )
 
-    # fit models
+    # Fit models
     lr_pipe.fit(X_train, y_train)
     rf_pipe.fit(X_train, y_train)
     hgb.fit(X_train, y_train)
 
+    # dictionary of trained models
     models = {"logistic": lr_pipe, "random_forest": rf_pipe, "hist_gb": hgb}
+
 
     # Evaluate on test set
     evals = {}
