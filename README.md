@@ -54,8 +54,7 @@ early_stage_diabetes/
 │   └── evaluation.txt                     # Model evaluation report
 ├── environment.yml                        # Conda environment specification
 ├── run.sh                                 # Full pipeline execution script
-├── requirements.txt   
-├── run.sh                                 # Full pipeline execution script
+├── requirements.txt 
 └── README.md                              # This file
 
 
@@ -118,8 +117,8 @@ python src/preprocess.py --input data/processed/raw_loaded.csv --out data/proces
 
 * Models trained:
 
-  1. Logistic Regression (scaled)
-  2. Random Forest Classifier (scaled)
+  1. Logistic Regression
+  2. Random Forest Classifier
   3. HistGradientBoosting Classifier
 
 * Evaluation metrics on test set: ROC AUC, precision, recall, F1-score, confusion matrix
@@ -163,19 +162,19 @@ python src/shap_analysis.py --model models/best_model.joblib --input data/proces
 
 ## Key Results
 
-* **Best model**: Random Forest Classifier
-* **ROC AUC**: 1.0
-* **Precision**: 1.0
-* **Recall**: 1.0
-* **F1-score**: 1.0
-* **Confusion Matrix**: [[40, 0], [0, 64]]
+* **Best model:** Random Forest Classifier  
+* **ROC AUC:** 0.9898  
+* **Precision:** 0.9830  
+* **Recall:** 0.9063  
+* **F1-score:** 0.9431  
+* **Confusion Matrix:**  [[39, 1], [6, 58]] 
 
 Other model performances for reference:
 
-| Model                | ROC AUC | Precision | Recall | F1-score |
-| -------------------- | ------- | --------- | ------ | -------- |
-| Logistic Regression  | 0.988   | 1.0       | 0.859  | 0.924    |
-| HistGradientBoosting | 0.998   | 0.984     | 0.984  | 0.984    |
+| Model               | ROC AUC  | Precision | Recall  | F1-score |
+|---------------------|----------|-----------|---------|----------|
+| Logistic Regression | 0.9703   | 0.9298    | 0.8281  | 0.8760   |
+| HistGradientBoosting| 0.9879   | 0.9538    | 0.9688  | 0.9612   |
 
 **Top predictors** (via SHAP):
 
@@ -183,7 +182,7 @@ Other model performances for reference:
 2. Polydipsia
 3. Sudden weight loss
 4. Partial paresis
-5. Alopecia
+5. Polyphagia
 
 > SHAP visualizations are saved in `figures/shap_summary_beeswarm.png` and `figures/shap_feature_importance.png`
 
