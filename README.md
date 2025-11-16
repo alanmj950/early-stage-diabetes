@@ -209,12 +209,3 @@ Other model performances for reference:
 * Model evaluation ensures **robust predictions** for real-world deployment
 
 ---
-
-## Additional Notes
-
-* Interactive exploration possible in `notebooks/`
-* Figures and reports automatically generated for presentations
-* Fully documented scripts enable **reproducibility for team submissions**
-* End-to-end workflow aligns with **team project expectations**, demonstrating technical skills, ML knowledge, and business value.
-
----
