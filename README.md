@@ -1,19 +1,7 @@
-Absolutely! Here’s your **fully updated, end-to-end `README.md`** for your **Early Stage Diabetes Risk Prediction** project. I’ve incorporated:
-
-* Actual metrics from your `run.sh`
-* SHAP results
-* Notes about potential overfitting
-* All project workflow, reproducibility, and team-related sections
-
-This is **copy-paste ready** for your repo.
-
----
-
-```markdown
 # Early Stage Diabetes Risk Prediction
 
 ## Project Overview
-This project predicts the risk of early-stage diabetes using demographic and clinical features. It is a **classification problem**, where the target variable indicates whether an individual is at risk of early-stage diabetes. The project is structured to support **reproducibility, explainability, and collaborative team workflow**.
+A machine learning project to predict early-stage diabetes using patient clinical data. This project includes data preprocessing, model training, evaluation, and SHAP-based interpretability analysis.
 
 - **Classification Task**: Identify significant predictors of early-stage diabetes risk among individuals.
 - **Use Case**: Helps healthcare providers identify high-risk patients early and plan preventive interventions.
@@ -66,8 +54,7 @@ early_stage_diabetes/
 │   └── evaluation.txt                     # Model evaluation report
 ├── environment.yml                        # Conda environment specification
 ├── run.sh                                 # Full pipeline execution script
-├── requirements.txt   
-├── run.sh                                 # Full pipeline execution script
+├── requirements.txt 
 └── README.md                              # This file
 
 
@@ -82,7 +69,6 @@ early_stage_diabetes/
 ```bash
 conda env create -f environment.yml
 conda activate dsi_participant
-python -c "import sys; print(sys.version)"
 ````
 
 **Dependencies include**:
@@ -131,8 +117,8 @@ python src/preprocess.py --input data/processed/raw_loaded.csv --out data/proces
 
 * Models trained:
 
-  1. Logistic Regression (scaled)
-  2. Random Forest Classifier (scaled)
+  1. Logistic Regression
+  2. Random Forest Classifier
   3. HistGradientBoosting Classifier
 
 * Evaluation metrics on test set: ROC AUC, precision, recall, F1-score, confusion matrix
@@ -169,7 +155,6 @@ python src/shap_analysis.py --model models/best_model.joblib --input data/proces
 
 ### 6. Full Pipeline
 
-* Windows PowerShell: `.\run.ps1`
 * Bash: `bash run.sh`
 * Executes all steps in order from raw data to evaluation and SHAP analysis
 
@@ -177,19 +162,19 @@ python src/shap_analysis.py --model models/best_model.joblib --input data/proces
 
 ## Key Results
 
-* **Best model**: Random Forest Classifier
-* **ROC AUC**: 1.0
-* **Precision**: 1.0
-* **Recall**: 1.0
-* **F1-score**: 1.0
-* **Confusion Matrix**: [[40, 0], [0, 64]]
+* **Best model:** Random Forest Classifier  
+* **ROC AUC:** 0.9898  
+* **Precision:** 0.9830  
+* **Recall:** 0.9063  
+* **F1-score:** 0.9431  
+* **Confusion Matrix:**  [[39, 1], [6, 58]] 
 
 Other model performances for reference:
 
-| Model                | ROC AUC | Precision | Recall | F1-score |
-| -------------------- | ------- | --------- | ------ | -------- |
-| Logistic Regression  | 0.988   | 1.0       | 0.859  | 0.924    |
-| HistGradientBoosting | 0.998   | 0.984     | 0.984  | 0.984    |
+| Model               | ROC AUC  | Precision | Recall  | F1-score |
+|---------------------|----------|-----------|---------|----------|
+| Logistic Regression | 0.9703   | 0.9298    | 0.8281  | 0.8760   |
+| HistGradientBoosting| 0.9879   | 0.9538    | 0.9688  | 0.9612   |
 
 **Top predictors** (via SHAP):
 
@@ -213,7 +198,7 @@ Other model performances for reference:
   * Feature branches created for each task: EDA, Modeling, SHAP
   * Pull Requests simulate collaborative team contribution
   * Commits clearly document preprocessing, modeling, evaluation
-* `run.sh` / `run.ps1` allows **end-to-end reproducible execution**
+* `run.sh` allows **end-to-end reproducible execution**
 
 ---
 
