@@ -181,8 +181,8 @@ Other model performances for reference:
 1. Polyuria
 2. Polydipsia
 3. Sudden weight loss
-4. Weakness
-5. Age
+4. Partial paresis
+5. Polyphagia
 
 > SHAP visualizations are saved in `figures/shap_summary_beeswarm.png` and `figures/shap_feature_importance.png`
 
